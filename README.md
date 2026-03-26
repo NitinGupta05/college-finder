@@ -2,6 +2,8 @@
 
 CollegeFinder is a responsive, frontend-first web application that helps students discover colleges, filter options, compare institutes, save favorites, and view detailed college profiles.
 
+LIVE DEMO: https://nitingupta05.github.io/college-finder/
+
 ## Overview
 
 The project is built with Vanilla JavaScript, modular architecture, and a local-storage-based authentication/session system. It is designed to provide:
