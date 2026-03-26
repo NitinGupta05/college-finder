@@ -113,3 +113,6 @@ public
 
 # Windows OS
 Thumbs.db
+
+# Local agent/workflow metadata
+.agents/

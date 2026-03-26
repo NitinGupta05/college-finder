@@ -1,104 +1,114 @@
-# 🎓 CollegeFinder
+﻿# CollegeFinder
 
-![CollegeFinder Banner](https://img.shields.io/badge/Project-CollegeFinder-00113a?style=for-the-badge)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
-![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
-![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)
+CollegeFinder is a responsive, frontend-first web application that helps students discover colleges, filter options, compare institutes, save favorites, and view detailed college profiles.
 
-**CollegeFinder** is a modern, responsive, and blazing fast vanilla JavaScript web application designed to help students discover, filter, compare, and save their dream colleges across India. Built with clean code principles, it operates natively in the browser with **0 dependencies**, ensuring exceptional performance and reliability.
+## Overview
 
-### 🌐 Live Demo
-Experience the app instantly without any setup!
-👉 **[View CollegeFinder Live](https://yourusername.github.io/collegefinder/)**  *(Replace with your actual GitHub Pages URL)*
+The project is built with Vanilla JavaScript, modular architecture, and a local-storage-based authentication/session system. It is designed to provide:
 
----
+- Fast college browsing and filtering
+- Protected detailed pages for authenticated users
+- Personalized favorites and profile insights
+- Clean, modern, responsive UI across devices
 
-## ✨ Key Features
+## Core Features
 
-*   **"Academic Ivory" Design System**: A premium, editorial-style user interface built entirely with custom CSS. It features glassmorphism, tonal depth layering, fluid typography (Manrope & Inter), and ambient soft shadows—moving away from traditional, rigid database styles.
-*   **Advanced Filtering Engine**: Instantly filter across 100+ universities by Category (Engineering, Medical, Law, Arts), type (Govt/Private), fee ranges, and placement ratings.
-*   **Search & Autocomplete**: Lightning-fast, debounced search that provides immediate matching for college names.
-*   **Persistent Favorites Profile**: Save top choices directly to your browser's Local Storage. Your personalized dashboard tracks saved colleges and viewing history across sessions.
-*   **Dynamic College Details**: Dedicated detail pages offering deep-dive stats, maps, infrastructure highlights, and smart recommendations based on browsing history.
-*   **Theme Versatility**: A built-in Dark/Light mode toggle that seamlessly adapts the premium color palette and persists across reloads.
-*   **Performance First**: Completely static routing, lazy-loaded images, and a highly optimized payload (~30KB gzipped).
+- College browsing with advanced filters
+- Search with quick suggestions
+- Ranking page by category and metrics
+- Favorites management
+- Recently viewed colleges
+- Compare colleges (Browse page)
+- Authentication (Sign Up / Sign In / Session persistence)
+- Protected routes for restricted pages
+- Light/Dark theme toggle
 
----
+## Tech Stack
 
-## 🛠️ Tech Stack & Architecture
+- HTML5
+- CSS3 (custom design system, responsive breakpoints)
+- JavaScript ES Modules
+- LocalStorage (session/auth/favorites/recent data)
 
-This project strictly adheres to **Vanilla Web Technologies** to master the fundamentals before moving to frameworks.
-
-*   **DOM/Logic:** ES6+ Vanilla JavaScript (Modules, Event Delegation, Debouncing algorithms)
-*   **Styling:** Custom Vanilla CSS3 (CSS Variables, Flexbox/Grid, Transform Animations, Backdrop-filters)
-*   **State Management:** Native Web Storage API (`localStorage`)
-*   **Data Source:** JSON-based client-side graph (`js/data.js`) with dynamically fetched Wikipedia imagery.
-*   **A11y (Accessibility):** WCAG AA standards, semantic HTML structure, and screen-reader optimized elements.
-
----
-
-## 📁 Repository Structure
+## Project Structure
 
 ```text
 collegefinder/
-├── 📄 index.html                 # Main Dashboard: Search, Filter, and Grid View
-├── 📄 college.html               # Dynamic Detail View (renders via ?id= query param)
-├── 📄 favorites.html             # Saved list interacting with Local Storage
-├── 📄 profile.html               # Advanced user statistics and history
-├── 📄 rankings.html              # Curated top lists and ranking dashboard
-├── 📄 scholarships.html          # Secondary database for financial aid
-├── 📄 trending.html              # Recently viewed and popular institutions
-├── 📄 about.html                 # Project methodology and author details
-│
-├── 📁 css/
-│   ├── 📄 style.css              # Global styles & "Academic Ivory" Design System
-│   └── 📄 accessibility.css      # Screen reader only classes (.sr-only)
-│
-├── 📁 js/
-│   ├── 📄 app.js                 # Primary Entry Point: routing, events, orchestration
-│   ├── 📄 data.js                # Database arrays for Colleges and Scholarships
-│   ├── 📄 filter.js              # Advanced array filtering/sorting algorithms
-│   ├── 📄 storage.js             # LocalStorage wrapper utilities
-│   ├── 📄 recommend.js           # Multi-factor similarity scoring mechanism
-│   ├── 📄 compare.js             # Matrix generation for the Compare Modal
-│   └── 📄 recent.js              # Ring-buffer logic for recently viewed queue
-│
-└── 📁 assets/                    # Static resources (images, icons)
+├── index.html
+├── college.html
+├── favorites.html
+├── rankings.html
+├── profile.html
+├── about.html
+├── css/
+│   ├── style.css
+│   └── accessibility.css
+├── js/
+│   ├── app.js
+│   ├── api.js
+│   ├── data.js
+│   ├── filter.js
+│   ├── storage.js
+│   ├── compare.js
+│   ├── recommend.js
+│   ├── recent.js
+│   └── toast.js
+└── README.md
 ```
 
+## Local Setup
+
+Because ES modules are used, run the project through a local server.
+
+### Option 1: VS Code Live Server
+
+1. Open the `collegefinder` folder in VS Code
+2. Install Live Server extension
+3. Open `index.html` with Live Server
+
+### Option 2: Python
+
+```bash
+python -m http.server 8000
+```
+
+Open: `http://localhost:8000`
+
+### Option 3: Node
+
+```bash
+npx serve .
+```
+
+## Authentication Notes
+
+- New users can register from the modal auth flow
+- Login creates a persisted session/token in `localStorage`
+- Protected pages redirect unauthorized users to home with login prompt
+
+## Quality & Reliability
+
+The codebase includes:
+
+- Route guarding for protected pages
+- Loading and error states for key async flows
+- Defensive rendering checks for null/invalid data
+- Responsive layout for mobile/tablet/desktop
+
+## Contributing
+
+Please review [CONTRIBUTING.md](CONTRIBUTING.md) before opening pull requests.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
+
 ---
 
-## 🚀 How to Run Locally
+## Author
 
-Because this project uses ES6 Modules (`import/export`), you cannot simply double-click the `index.html` file (due to browser CORS policies). You must serve it over a local HTTP server.
+**Nitin Kumar Gupta**
 
-**Option 1: Using VS Code Live Server (Recommended)**
-1. Open the `collegefinder` folder in VS Code.
-2. Install the `Live Server` extension.
-3. Right-click on `index.html` and select **"Open with Live Server"**.
-
-**Option 2: Using Python**
-1. Ensure Python 3 is installed.
-2. Open terminal in the project directory.
-3. Run: `python -m http.server 8000`
-4. Open your browser and navigate to `http://localhost:8000`.
-
-**Option 3: Using Node.js**
-1. Ensure Node is installed.
-2. Run: `npx serve .`
-
----
-
-## 🤝 Contributing
-
-We welcome contributions to make CollegeFinder even better! Whether it's adding a new college to the dataset, refining the CSS animations, or optimizing the search algorithm. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for detailed instructions on the workflow.
-
----
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
----
-*Architected and developed by **Nitin Kumar Gupta**.*
+- LinkedIn: https://www.linkedin.com/in/nitin-kumar-gupta-0a5567373/
+- GitHub: https://github.com/NitinGupta05
+- Email: nitinkumargupta515@gmail.com

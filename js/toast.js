@@ -42,6 +42,7 @@ class Toast {
       .toast-success { border-left-color: #28a745; }
       .toast-error { border-left-color: #dc3545; }
       .toast-info { border-left-color: #17a2b8; }
+      .toast-warning { border-left-color: #ffc107; }
       
       .toast.exiting {
         animation: slideOutRight 0.3s ease forwards;

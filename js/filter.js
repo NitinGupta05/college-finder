@@ -46,7 +46,7 @@ export function applyFilters(colleges, filters, sortBy) {
   result = result.filter(c => c.placement >= filters.minPlacement);
   result = result.filter(c => c.infrastructure >= filters.minInfrastructure);
   result = result.filter(c => c.fees >= filters.minFees);
-  if (filters.maxFees) {
+  if (Number.isFinite(filters.maxFees) && filters.maxFees > 0) {
     result = result.filter(c => c.fees <= filters.maxFees);
   }
 

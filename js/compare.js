@@ -1,5 +1,12 @@
-// Advanced Compare Logic
+// Advanced Compare Logic with XSS protection
+
 let selectedColleges = [];
+
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = String(str);
+  return div.innerHTML;
+}
 
 export const Compare = {
   add(collegeId, colleges) {
@@ -25,22 +32,52 @@ export const Compare = {
 
   renderTable(container) {
     container.innerHTML = '';
-    
+
     selectedColleges.forEach(college => {
       const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>
-          <div>
-            <img src="${college.image}" alt="${college.name}" style="width: 40px; height: 30px; border-radius: 4px; object-fit: cover;">
-            ${college.name}
-          </div>
-        </td>
-        <td>${college.location}</td>
-        <td>₹${college.fees.toLocaleString()}</td>
-        <td class="${college.rating > 4.5 ? 'highlight-best' : ''}">${college.rating}</td>
-        <td>${college.type}</td>
-        <td><button onclick="Compare.removeItem(${college.id})" class="btn btn-danger btn-sm">Remove</button></td>
-      `;
+
+      // Build cells safely using DOM methods
+      const tdName = document.createElement('td');
+      const nameWrapper = document.createElement('div');
+      nameWrapper.style.cssText = 'display:flex;align-items:center;gap:8px;';
+      const img = document.createElement('img');
+      img.src = college.image;
+      img.alt = college.name;
+      img.style.cssText = 'width:40px;height:30px;border-radius:4px;object-fit:cover;';
+      const nameText = document.createTextNode(college.name);
+      nameWrapper.appendChild(img);
+      nameWrapper.appendChild(nameText);
+      tdName.appendChild(nameWrapper);
+
+      const tdLocation = document.createElement('td');
+      tdLocation.textContent = college.location;
+
+      const tdFees = document.createElement('td');
+      tdFees.textContent = `₹${college.fees.toLocaleString()}`;
+
+      const tdRating = document.createElement('td');
+      tdRating.textContent = college.rating;
+      if (college.rating > 4.5) tdRating.classList.add('highlight-best');
+
+      const tdType = document.createElement('td');
+      tdType.textContent = college.type;
+
+      const tdAction = document.createElement('td');
+      const removeBtn = document.createElement('button');
+      removeBtn.className = 'btn btn-danger btn-sm';
+      removeBtn.textContent = 'Remove';
+      removeBtn.addEventListener('click', () => {
+        Compare.remove(college.id);
+        Compare.renderTable(container);
+      });
+      tdAction.appendChild(removeBtn);
+
+      row.appendChild(tdName);
+      row.appendChild(tdLocation);
+      row.appendChild(tdFees);
+      row.appendChild(tdRating);
+      row.appendChild(tdType);
+      row.appendChild(tdAction);
       container.appendChild(row);
     });
   },
@@ -54,11 +91,12 @@ export const Compare = {
     const minFees = Math.min(...selectedColleges.map(c => c.fees));
     return selectedColleges.find(c => c.fees === minFees);
   },
-  
+
   removeItem(id) {
     this.remove(id);
-    this.renderTable(document.getElementById('compare-table-body'));
+    const tbody = document.getElementById('compare-table-body');
+    if (tbody) this.renderTable(tbody);
   }
 };
 
-window.Compare = Compare;  // Global access
+window.Compare = Compare;

@@ -1,100 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About - College Finder</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>About | CollegeFinder</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <nav class="navbar">
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container nav-content">
-      <a href="index.html" class="logo">🎓 CollegeFinder</a>
+      <a href="index.html" class="logo">CollegeFinder</a>
+      <button id="nav-toggle" class="hamburger" aria-label="Toggle menu"><span></span><span></span><span></span></button>
       <div class="nav-links">
-        <a href="index.html">Home</a>
+        <a href="index.html">Browse</a>
+        <a href="rankings.html">Rankings</a>
         <a href="favorites.html">Favorites <span id="fav-count" class="badge">0</span></a>
-        <a href="about.html" class="active">About</a>
+        <a href="profile.html">Profile</a>
+        <a href="about.html" class="active" aria-current="page">About</a>
+        <span id="user-chip" class="user-chip hidden">Hi, <strong id="user-chip-name"></strong></span>
+        <button id="auth-button" class="btn btn-secondary btn-sm">Login</button>
         <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
       </div>
     </div>
   </nav>
 
-  <main style="max-width: 800px; margin: 4rem auto; padding: 2rem;">
-    <section class="hero-section" style="text-align: center; margin-bottom: 3rem;">
-      <i class="fas fa-graduation-cap" style="font-size: 4rem; color: var(--accent); margin-bottom: 1rem;"></i>
-      <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">About CollegeFinder</h1>
-      <p style="color: var(--text-secondary); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">
-        Your ultimate platform to discover, compare, and save dream colleges across India.
-      </p>
+  <main class="container single-college-page">
+    <section class="profile-panel">
+      <h1>About CollegeFinder</h1>
+      <p>CollegeFinder is a modern college discovery platform built to simplify the decision-making journey for students. The application focuses on practical usability: fast browsing, meaningful filtering, secure access to detailed profiles, and a clean, responsive interface across devices.</p>
+      <p>The goal is to provide a reliable, production-oriented frontend experience where users can quickly shortlist institutions, compare options, and track preferences without friction.</p>
     </section>
 
-    <section class="features" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
-      <div class="feature-card" style="background: var(--bg-card); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow);">
-        <i class="fas fa-search" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
-        <h3>Advanced Filters</h3>
-        <p>Filter by category, type, location, fees, rating. Find perfect match fast.</p>
-      </div>
-      <div class="feature-card" style="background: var(--bg-card); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow);">
-        <i class="fas fa-heart" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
-        <h3>Smart Favorites</h3>
-        <p>Save colleges, access anywhere. Persistent across sessions.</p>
-      </div>
-      <div class="feature-card" style="background: var(--bg-card); padding: 2rem; border-radius: var(--radius); box-shadow: var(--shadow);">
-        <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 1rem;"></i>
-        <h3>Fully Responsive</h3>
-        <p>Perfect on desktop, tablet, mobile. Smooth experience everywhere.</p>
-      </div>
+    <section class="profile-panel">
+      <h2>What The Platform Offers</h2>
+      <ul>
+        <li>Interactive college browsing with filter-driven exploration</li>
+        <li>Search with quick suggestion flow</li>
+        <li>Category-based rankings for easier comparison</li>
+        <li>Favorites and recently viewed tracking</li>
+        <li>Protected detail views for authenticated users</li>
+        <li>Responsive interface for mobile, tablet, and desktop</li>
+      </ul>
     </section>
 
-    <section class="author-section" style="background: var(--bg-secondary); padding: 3rem 2rem; border-radius: var(--radius); margin-bottom: 3rem; text-align: center;">
-      <img src="https://via.placeholder.com/120x120/3b82f6/ffffff?text=NKG" alt="Nitin Kumar Gupta" style="width: 120px; height: 120px; border-radius: 50%; margin-bottom: 1.5rem; box-shadow: var(--shadow);">
-      <h2>Nitin Kumar Gupta</h2>
-      <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">
-        Full-Stack Developer | Frontend Specialist
-      </p>
-      <div style="display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; margin-bottom: 1rem;">
-        <a href="https://www.linkedin.com/in/nitin-kumar-gupta-0a5567373/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="text-decoration: none;">
+    <section class="profile-panel">
+      <h2>Tech Stack</h2>
+      <ul>
+        <li><strong>Frontend:</strong> HTML5, CSS3, Vanilla JavaScript (ES Modules)</li>
+        <li><strong>State & Session:</strong> LocalStorage (favorites, theme, auth session/token)</li>
+        <li><strong>UI System:</strong> Custom design tokens, component-level transitions, responsive layouts</li>
+        <li><strong>Architecture:</strong> Modular JavaScript files for routing, filtering, storage, compare, recommendations, and API abstraction</li>
+      </ul>
+    </section>
+
+    <section class="profile-panel">
+      <h2>Architecture & Quality Focus</h2>
+      <ul>
+        <li>Centralized route orchestration in a single app controller</li>
+        <li>Protected routes with session-aware navigation guards</li>
+        <li>Defensive rendering for invalid or missing data states</li>
+        <li>Loading and fallback error states for asynchronous flows</li>
+        <li>Reusable UI patterns and consistent spacing/typography scale</li>
+      </ul>
+    </section>
+
+    <section class="profile-panel">
+      <h2>Built By</h2>
+      <p><strong>Nitin Kumar Gupta</strong></p>
+      <p>Frontend and Full-Stack Developer focused on building user-centered, performance-aware, and production-ready web applications.</p>
+      <div class="card-actions" style="margin-top: 1rem; flex-wrap: wrap;">
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/nitin-kumar-gupta-0a5567373/" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-linkedin"></i> LinkedIn
         </a>
-        <a href="https://github.com/NitinGupta05" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="text-decoration: none;">
+        <a class="btn btn-secondary" href="https://github.com/NitinGupta05" target="_blank" rel="noopener noreferrer">
           <i class="fab fa-github"></i> GitHub
         </a>
-        <a href="mailto:nitinkumargupta515@gmail.com" class="btn btn-secondary" style="text-decoration: none;">
+        <a class="btn btn-secondary" href="mailto:nitinkumargupta515@gmail.com">
           <i class="fas fa-envelope"></i> Email
         </a>
       </div>
-      <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">
-        Passionate developer crafting modern web experiences. CollegeFinder showcases advanced frontend skills with vanilla technologies.
-      </p>
-    </section>
-
-    <section class="tech-stack" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin-bottom: 3rem;">
-      <div style="text-align: center;">
-        <i class="fab fa-html5" style="font-size: 3rem; color: #e34f26;"></i>
-        <h4>HTML5</h4>
-      </div>
-      <div style="text-align: center;">
-        <i class="fab fa-css3-alt" style="font-size: 3rem; color: #1572b6;"></i>
-        <h4>CSS3</h4>
-      </div>
-      <div style="text-align: center;">
-        <i class="fab fa-js-square" style="font-size: 3rem; color: #f7df1e;"></i>
-        <h4>Vanilla JS</h4>
-      </div>
-      <div style="text-align: center;">
-        <i class="fas fa-database" style="font-size: 3rem; color: var(--accent);"></i>
-        <h4>localStorage</h4>
-      </div>
-    </section>
-
-    <section class="cta" style="text-align: center; padding: 3rem 2rem; background: var(--accent); color: white; border-radius: var(--radius);">
-      <h2>Ready to Find Your College?</h2>
-      <p style="margin-bottom: 2rem; opacity: 0.9;">Explore 60+ top Indian colleges now!</p>
-      <a href="index.html" class="btn" style="background: white; color: var(--accent); padding: 1rem 2rem; font-size: 1.1rem; font-weight: 600; text-decoration: none; border-radius: 50px;">
-        Start Exploring <i class="fas fa-arrow-right"></i>
-      </a>
     </section>
   </main>
 

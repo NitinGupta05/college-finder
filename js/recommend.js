@@ -1,8 +1,9 @@
-// Smart Recommendations - FIXED
-import { colleges } from './data.js';
+// Smart Recommendations - API data-driven
+import { API } from './api.js';
 
-export function getRecommendations(baseCollegeId, limit = 6) {
-  const baseCollege = colleges.find(c => c.id === baseCollegeId);
+export async function getRecommendations(baseCollegeId, limit = 6) {
+  const colleges = await API.getColleges();
+  const baseCollege = colleges.find(c => c.id === Number(baseCollegeId));
   if (!baseCollege) {
     // Trending fallback
     return colleges
@@ -32,18 +33,24 @@ export function renderRecommendations(recommendations, containerSelector, title 
   const container = document.querySelector(containerSelector);
   if (!container) return;
 
+  const escapeHTML = (str) => {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  };
+
   container.innerHTML = `
     <div class="section-header">
-      <h3>${title} <i class="fas fa-star"></i></h3>
+      <h3>${escapeHTML(title)} <i class="fas fa-star"></i></h3>
     </div>
     <div class="recommended-grid">
       ${recommendations.map(rec => `
         <div class="rec-card">
-          <img src="${rec.image}" alt="${rec.name}" loading="lazy">
+          <img src="${rec.image}" alt="${escapeHTML(rec.name)}" loading="lazy">
           <div class="rec-info">
-            <h4>${rec.name}</h4>
+            <h4>${escapeHTML(rec.name)}</h4>
             <div class="rec-meta">
-              <span>${rec.location}</span>
+              <span>${escapeHTML(rec.location)}</span>
               <span class="rating-small">⭐ ${rec.rating.toFixed(1)}</span>
             </div>
             <a href="college.html?id=${rec.id}" class="btn-rec">View Details</a>
