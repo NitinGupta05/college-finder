@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Favorites</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">🎓 CollegeFinder</a>
+      <div class="nav-links">
+        <a href="index.html">Browse</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="scholarships.html">Scholarships</a>
+        <a href="trending.html">Trending</a>
+        <a href="favorites.html" class="active">Favorites <span id="fav-count" class="badge">0</span></a>
+        <a href="profile.html"><i class="fas fa-user-circle" title="My Profile"></i></a>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <h2 class="page-title">Saved Colleges ❤️</h2>
+    <div id="favorites-grid" class="grid-container">
+      <!-- Filled by JS -->
+    </div>
+  </main>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" style="scroll-behavior: smooth;">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Finder | Find Your Dream College</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/accessibility.css">
+</head>
+<body>
+<nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="container nav-content">
+      <a href="index.html" class="logo">🎓 CollegeFinder</a>
+      <div class="nav-links">
+        <a href="index.html" class="active" aria-current="page">Browse</a>
+        <a href="rankings.html">Rankings</a>
+        <a href="scholarships.html">Scholarships</a>
+        <a href="trending.html">Trending</a>
+        <a href="favorites.html">Favorites <span id="fav-count" class="badge" aria-live="polite">0</span></a>
+        <a href="profile.html"><i class="fas fa-user-circle" aria-hidden="true" title="My Profile"></i></a>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode"><i class="fas fa-moon" aria-hidden="true"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container main-layout" role="main" aria-label="College finder main content">
+    <!-- Sidebar Filters -->
+    <aside class="sidebar" style="position: sticky; top: 20px; align-self: start; height: fit-content;" aria-label="Filters">
+      <div class="filter-header">
+        <h3>Filters</h3>
+        <button id="reset-filters" class="btn-text" aria-label="Reset all filters">Reset</button>
+      </div>
+      
+      <div class="filter-group">
+        <label for="category-select">Category:</label>
+        <select id="category-select" class="form-control" aria-describedby="category-help">
+          <option value="">All Categories</option>
+        </select>
+        <small id="category-help" class="sr-only">Filter colleges by category (Engineering, Medical, Law, Arts)</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="type-select">Type:</label>
+        <select id="type-select" class="form-control" aria-describedby="type-help">
+          <option value="">All Types</option>
+        </select>
+        <small id="type-help" class="sr-only">Filter by Government or Private colleges</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="location-select">Location:</label>
+        <select id="location-select" class="form-control" aria-describedby="location-help">
+          <option value="">All Locations</option>
+        </select>
+        <small id="location-help" class="sr-only">Filter colleges by city or state</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="min-rating">
+          Minimum Rating: <span id="rating-val" aria-live="polite">0</span>/5
+        </label>
+        <input type="range" id="min-rating" class="form-control" min="0" max="5" step="0.1" value="0" 
+               aria-valuemin="0" aria-valuemax="5" aria-valuenow="0" aria-valuetext="0 stars">
+      </div>
+
+      <div class="filter-group">
+        <label for="fees-range">Annual Fees Range (₹):</label>
+        <div class="range-inputs" role="group" aria-labelledby="fees-range">
+          <label for="min-fees" class="sr-only">Minimum fees</label>
+          <input type="number" id="min-fees" placeholder="Min" class="form-control"
+                 aria-describedby="fees-help" inputmode="numeric">
+          <label for="max-fees" class="sr-only">Maximum fees</label>
+          <input type="number" id="max-fees" placeholder="Max" class="form-control"
+                 aria-describedby="fees-help" inputmode="numeric">
+        </div>
+        <small id="fees-help" class="sr-only">Enter fees range in rupees. Leave empty for no limit.</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="min-placement">
+          Minimum Placement: <span id="placement-val" aria-live="polite">0</span>%
+        </label>
+        <input type="range" id="min-placement" class="form-control" min="0" max="100" step="5" value="0"
+               aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      </div>
+
+      <div class="filter-group">
+        <label for="min-infrastructure">
+          Infrastructure Rating: <span id="infrastructure-val" aria-live="polite">0</span>/5
+        </label>
+        <input type="range" id="min-infrastructure" class="form-control" min="0" max="5" step="0.1" value="0"
+               aria-valuemin="0" aria-valuemax="5" aria-valuenow="0">
+      </div>
+
+      <div class="filter-group">
+        <label for="accreditation-group">Accreditation:</label>
+        <div id="accreditation-group" class="checkbox-group" role="group" aria-describedby="accred-help">
+          <label><input type="checkbox" name="accreditation" value="NAAC A++"> NAAC A++</label>
+          <label><input type="checkbox" name="accreditation" value="NAAC A+"> NAAC A+</label>
+          <label><input type="checkbox" name="accreditation" value="NAAC A"> NAAC A</label>
+          <label><input type="checkbox" name="accreditation" value="NAAC B+"> NAAC B+</label>
+          <label><input type="checkbox" name="accreditation" value="NAAC B"> NAAC B</label>
+        </div>
+        <small id="accred-help" class="sr-only">Filter by accreditation type</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="entrance-exam-group">Entrance Exam:</label>
+        <div id="entrance-exam-group" class="checkbox-group" role="group" aria-describedby="exam-help">
+          <label><input type="checkbox" name="entrance-exam" value="JEE Main"> JEE Main</label>
+          <label><input type="checkbox" name="entrance-exam" value="NEET"> NEET</label>
+          <label><input type="checkbox" name="entrance-exam" value="CLAT"> CLAT</label>
+          <label><input type="checkbox" name="entrance-exam" value="Merit"> Merit</label>
+          <label><input type="checkbox" name="entrance-exam" value="BITSAT"> BITSAT</label>
+          <label><input type="checkbox" name="entrance-exam" value="VITEEE"> VITEEE</label>
+        </div>
+        <small id="exam-help" class="sr-only">Filter by entrance exam required</small>
+      </div>
+
+      <div class="filter-group">
+        <label for="facilities-group">Facilities:</label>
+        <div id="facilities-group" class="checkbox-group" role="group" aria-describedby="fac-help">
+          <label><input type="checkbox" name="facilities" value="Hostel"> Hostel</label>
+          <label><input type="checkbox" name="facilities" value="Lab"> Lab</label>
+          <label><input type="checkbox" name="facilities" value="Library"> Library</label>
+          <label><input type="checkbox" name="facilities" value="Sports"> Sports</label>
+          <label><input type="checkbox" name="facilities" value="WiFi"> WiFi</label>
+          <label><input type="checkbox" name="facilities" value="Cafeteria"> Cafeteria</label>
+        </div>
+        <small id="fac-help" class="sr-only">Filter by available facilities</small>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <section class="content">
+      <!-- Search & Sort -->
+      <div class="controls-bar">
+        <div class="search-wrapper" role="search">
+          <label for="search-input" class="sr-only">Search colleges by name</label>
+          <i class="fas fa-search search-icon" aria-hidden="true"></i>
+          <input type="search" id="search-input" placeholder="Search colleges by name..." 
+                 aria-controls="search-suggestions" aria-label="Search colleges by name">
+          <div id="search-suggestions" class="suggestions-dropdown" role="listbox" aria-label="Search suggestions"></div>
+        </div>
+        <label for="sort-select" class="sr-only">Sort results by</label>
+        <select id="sort-select" class="form-control w-auto" aria-describedby="sort-help">
+          <option value="rating">Sort by: Rating (High to Low)</option>
+          <option value="placement">Sort by: Placement (High to Low)</option>
+          <option value="fees">Sort by: Fees (Low to High)</option>
+        </select>
+        <small id="sort-help" class="sr-only">Sort filtered colleges</small>
+      </div>
+
+      <!-- Sections -->
+      <div id="recent-section" class="section hidden">
+        <h4>Recently Viewed 🕒</h4>
+        <div class="horizontal-scroll" id="recent-container"></div>
+      </div>
+
+      <!-- Grid -->
+      <div id="colleges-grid" class="grid-container" role="grid" aria-label="College grid" aria-live="polite"></div>
+      
+      <div class="load-more-container">
+        <button id="load-more" class="btn btn-primary">Load More</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- Compare Modal -->
+  <div id="compare-modal" class="modal">
+    <div class="modal-content large-modal">
+      <div class="modal-header">
+        <h2>Compare Colleges</h2>
+        <button class="close-modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>College</th>
+              <th>Location</th>
+              <th>Fees</th>
+              <th>Rating</th>
+              <th>Type</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="compare-table-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
