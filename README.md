@@ -95,16 +95,6 @@ The codebase includes:
 - Defensive rendering checks for null/invalid data
 - Responsive layout for mobile/tablet/desktop
 
-## Contributing
-
-Please review [CONTRIBUTING.md](CONTRIBUTING.md) before opening pull requests.
-
-## License
-
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
-
----
-
 ## Author
 
 **Nitin Kumar Gupta**
